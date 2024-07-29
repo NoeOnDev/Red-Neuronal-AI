@@ -40,7 +40,7 @@ def predict():
     img_array = preprocess_image(img_array)
     prediction = model.predict(img_array)
     
-    classes = ['As de picas', 'Dos de picas']
+    classes = ['abc','As de picas', 'Dos de picas', 'tres_de_picas']
     confidence_threshold = 0.9
 
     max_prediction = np.max(prediction)
