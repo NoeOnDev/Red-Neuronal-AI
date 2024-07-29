@@ -35,14 +35,14 @@ model = Sequential([
     MaxPooling2D((2, 2)),
     Flatten(),
     Dense(512, activation='relu'),
-    Dense(4, activation='softmax')
+    Dense(6, activation='softmax')
 ])
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 history = model.fit(
     train_generator,
-    epochs=200,
+    epochs=500,
     validation_data=validation_generator
 )
 
