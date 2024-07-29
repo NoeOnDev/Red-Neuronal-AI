@@ -6,7 +6,7 @@ import cv2
 import os
 
 app = Flask(__name__)
-model = load_model('as_de_picas_model.h5')
+model = load_model('picas_model.h5')
 
 def preprocess_image(img_array):
     img_array = cv2.resize(img_array, (150, 150))
@@ -25,15 +25,32 @@ def predict():
     
     file = request.files['file']
     file_path = './' + file.filename
-    file.save(file_path)
+    
+    try:
+        file.save(file_path)
+    except Exception as e:
+        return jsonify({'error': f'Failed to save file: {str(e)}'}), 500
     
     img_array = cv2.imread(file_path)
+    if img_array is None:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        return jsonify({'error': 'Invalid image'}), 400
+    
     img_array = preprocess_image(img_array)
     prediction = model.predict(img_array)
     
-    predicted_class = "As de picas" if prediction[0] > 0.5 else "No As de picas"
+    classes = ['As de picas', 'Dos de picas']
+    confidence_threshold = 0.9
+
+    max_prediction = np.max(prediction)
+    if max_prediction < confidence_threshold:
+        predicted_class = "No hay carta reconocida"
+    else:
+        predicted_class = classes[np.argmax(prediction)]
     
-    os.remove(file_path)
+    if os.path.exists(file_path):
+        os.remove(file_path)
     
     return jsonify({'prediction': predicted_class})
 

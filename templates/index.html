@@ -6,7 +6,7 @@
   <body>
     <h1>Image Recognition</h1>
     <video id="video" width="320" height="240" autoplay></video>
-    <p id="result"></p>
+    <p id="result">Esperando imagen...</p> 
 
     <script>
       const video = document.getElementById("video");
@@ -41,10 +41,14 @@
           body: formData,
         });
 
-        const result = await response.json();
-        document.getElementById(
-          "result"
-        ).innerText = `Prediction: ${result.prediction}`;
+        if (response.ok) {
+          const result = await response.json();
+          document.getElementById(
+            "result"
+          ).innerText = `Prediction: ${result.prediction}`;
+        } else {
+          document.getElementById("result").innerText = `Error in prediction`;
+        }
       }
 
       setInterval(predictImage, 1000);
