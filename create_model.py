@@ -1,6 +1,7 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.optimizers import Adam
 
 train_dir = 'images_train'
 
@@ -37,11 +38,14 @@ model = Sequential([
     Dense(1, activation='sigmoid')
 ])
 
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+learning_rate = 0.001
+optimizer = Adam(learning_rate=learning_rate)
+
+model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'])
 
 history = model.fit(
     train_generator,
-    epochs=10,
+    epochs=200,
     validation_data=validation_generator
 )
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Recognition</title>
+  </head>
+  <body>
+    <h1>Image Recognition</h1>
+    <video id="video" width="320" height="240" autoplay></video>
+    <p id="result"></p>
+
+    <script>
+      const video = document.getElementById("video");
+
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing camera: ", err);
+        });
+
+      function captureFrame() {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.width;
+        canvas.height = video.height;
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        return canvas.toDataURL("image/jpeg");
+      }
+
+      async function predictImage() {
+        const dataUrl = captureFrame();
+        const blob = await (await fetch(dataUrl)).blob();
+
+        const formData = new FormData();
+        formData.append("file", blob, "image.jpg");
+
+        const response = await fetch("/predict", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        document.getElementById(
+          "result"
+        ).innerText = `Prediction: ${result.prediction}`;
+      }
+
+      setInterval(predictImage, 2000);
+    </script>
+  </body>
+</html>
