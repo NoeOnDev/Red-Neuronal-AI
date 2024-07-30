@@ -61,7 +61,8 @@ if __name__ == "__main__":
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
     
-    img_count = 0
+    existing_images = [f for f in os.listdir(output_directory) if f.endswith('.jpg')]
+    img_count = len(existing_images)
     
     camera_index = int(input("Ingrese el índice de la cámara que desea usar: "))
     
