@@ -39,7 +39,12 @@ def predict():
     img_array = preprocess_image(img_array)
     prediction = model.predict(img_array)
     
-    classes = ['As de picas', 'Dos de picas', 'Tres de picas', 'Cuatro de picas', 'Cinco de picas', 'Seis de picas']
+    classes = [
+        '10_de_picas', '11_j_de_picas', '12_q_de_picas', '13_k_de_picas', 
+        '1_as_de_picas', '2_de_picas', '3_de_picas', '4_de_picas', 
+        '5_de_picas', '6_de_picas', '7_de_picas', '8_de_picas', '9_de_picas'
+    ]
+    
     confidence_threshold = 0.5
 
     max_prediction = np.max(prediction)
