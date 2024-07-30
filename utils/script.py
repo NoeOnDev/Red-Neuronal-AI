@@ -21,24 +21,33 @@ def capture_images_from_camera(output_dir, img_count, capture_interval=20, camer
             break
     
     frame_count = 0
+    paused = False
     
     while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
-        
-        if frame_count % capture_interval == 0:
-            img_path = os.path.join(output_dir, f"img_{img_count:02d}.jpg")
-            cv2.imwrite(img_path, frame)
-            print(f"Saved image {img_path}")
-            img_count += 1
-        
-        frame_count += 1
+        if not paused:
+            ret, frame = cap.read()
+            if not ret:
+                break
+            
+            if frame_count % capture_interval == 0:
+                img_path = os.path.join(output_dir, f"img_{img_count:02d}.jpg")
+                cv2.imwrite(img_path, frame)
+                print(f"Saved image {img_path}")
+                img_count += 1
+            
+            frame_count += 1
 
-        cv2.imshow('Capturing Images', frame)
-         
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+            cv2.imshow('Capturing Images', frame)
+        
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord('q'):
             break
+        elif key == ord('p'):
+            paused = not paused
+            if paused:
+                print("Paused. Press 'p' again to resume.")
+            else:
+                print("Resumed capturing images.")
     
     cap.release()
     cv2.destroyAllWindows()
@@ -46,7 +55,7 @@ def capture_images_from_camera(output_dir, img_count, capture_interval=20, camer
     return img_count
 
 if __name__ == "__main__":
-    output_directory = "images_train/tmp/"
+    output_directory = "images_train/1_as_de_picas/"
     
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
