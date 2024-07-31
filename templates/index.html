@@ -16,6 +16,7 @@
         flex-direction: column;
         align-items: center;
         gap: 10px;
+        position: relative;
       }
       #video {
         border: 2px solid #000;
@@ -24,16 +25,28 @@
         font-size: 1.5em;
         font-weight: bold;
       }
+      #timer {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
+      <div id="timer">4</div>
       <video id="video" width="480" height="360" autoplay></video>
       <p id="result">Esperando imagen...</p>
     </div>
 
     <script>
       const video = document.getElementById("video");
+      const timer = document.getElementById("timer");
+      let countdown = 4;
 
       navigator.mediaDevices
         .getUserMedia({ video: true })
@@ -69,13 +82,23 @@
           const result = await response.json();
           document.getElementById(
             "result"
-          ).innerText = `Prediction: ${result.prediction}`;
+          ).innerText = `Predicción: ${result.prediction}`;
         } else {
           document.getElementById("result").innerText = `Error in prediction`;
         }
+
+        countdown = 4;
       }
 
-      setInterval(predictImage, 3500);
+      function updateTimer() {
+        timer.innerText = countdown;
+        if (countdown === 0) {
+          predictImage();
+        }
+        countdown = countdown === 0 ? 4 : countdown - 1;
+      }
+
+      setInterval(updateTimer, 1000);
     </script>
   </body>
 </html>

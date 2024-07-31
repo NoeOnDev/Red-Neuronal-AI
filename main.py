@@ -40,9 +40,9 @@ def predict():
     prediction = model.predict(img_array)
     
     classes = [
-        '10_de_picas', '11_j_de_picas', '12_q_de_picas', '13_k_de_picas', 
-        '1_as_de_picas', '2_de_picas', '3_de_picas', '4_de_picas', 
-        '5_de_picas', '6_de_picas', '7_de_picas', '8_de_picas', '9_de_picas'
+        '10 de picas', 'J de picas', 'Q de picas', 'K de picas', 
+        'As de picas', '2 de picas', '3 de picas', '4 de picas', 
+        '5 de picas', '6 de picas', '7 de picas', '8 de picas', '9 de picas'
     ]
     
     confidence_threshold = 0.9
