@@ -44,7 +44,7 @@ model = Sequential([
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-early_stopping = EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True)
+early_stopping = EarlyStopping(monitor='val_loss', patience=20, restore_best_weights=True)
 
 history = model.fit(
     train_generator,

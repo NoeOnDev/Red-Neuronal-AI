@@ -45,7 +45,7 @@ def predict():
         '5_de_picas', '6_de_picas', '7_de_picas', '8_de_picas', '9_de_picas'
     ]
     
-    confidence_threshold = 0.5
+    confidence_threshold = 0.9
 
     max_prediction = np.max(prediction)
     if max_prediction < confidence_threshold:

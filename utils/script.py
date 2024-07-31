@@ -32,7 +32,7 @@ def capture_images_from_camera(output_dir, img_count, camera_index=0):
         current_time = time.time()
         
         if not paused and (current_time - last_capture_time) >= 1:
-            img_path = os.path.join(output_dir, f"img_{img_count:02d}.jpg")
+            img_path = os.path.join(output_dir, f"img_{img_count:03d}.jpg")
             cv2.imwrite(img_path, frame)
             print(f"Saved image {img_path}")
             img_count += 1
@@ -56,7 +56,7 @@ def capture_images_from_camera(output_dir, img_count, camera_index=0):
     return img_count
 
 if __name__ == "__main__":
-    output_directory = "images_train/11_j_de_picas/"
+    output_directory = "images_train/13_k_de_picas/"
     
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
