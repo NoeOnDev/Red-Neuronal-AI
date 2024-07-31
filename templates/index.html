@@ -2,11 +2,35 @@
 <html>
   <head>
     <title>Image Recognition</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      #video {
+        border: 2px solid #000;
+      }
+      #result {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <h1>Image Recognition</h1>
-    <video id="video" width="320" height="240" autoplay></video>
-    <p id="result">Esperando imagen...</p> 
+    <div class="container">
+      <video id="video" width="480" height="360" autoplay></video>
+      <p id="result">Esperando imagen...</p>
+    </div>
 
     <script>
       const video = document.getElementById("video");
@@ -51,7 +75,7 @@
         }
       }
 
-      setInterval(predictImage, 1000);
+      setInterval(predictImage, 500);
     </script>
   </body>
 </html>
