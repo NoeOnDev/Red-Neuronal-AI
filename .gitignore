@@ -1,5 +1,6 @@
 images_train/
 images_test/
+charts/
 as_de_picas_model.h5
 picas_model.h5
 
