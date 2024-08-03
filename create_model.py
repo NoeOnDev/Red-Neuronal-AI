@@ -40,12 +40,12 @@ model = Sequential([
     Flatten(),
     Dense(512, activation='relu', kernel_regularizer=l2(0.001)),
     Dropout(0.5),
-    Dense(13, activation='softmax')
+    Dense(3, activation='softmax')
 ])
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-early_stopping = EarlyStopping(monitor='val_loss', patience=20, restore_best_weights=True)
+early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
 history = model.fit(
     train_generator,
@@ -54,7 +54,7 @@ history = model.fit(
     callbacks=[early_stopping]
 )
 
-model.save('picas_model.h5')
+model.save('pastillas_model.h5')
 
 plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')
