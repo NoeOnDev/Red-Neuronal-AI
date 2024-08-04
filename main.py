@@ -40,7 +40,7 @@ def predict():
     prediction = model.predict(img_array)
     
     classes = [
-        'Paracetamol', 'Cafelaxina', 'Simvastatina'
+        '01', '02', '03', '04'
     ]
     
     confidence_threshold = 0.9

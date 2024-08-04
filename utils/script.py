@@ -56,7 +56,7 @@ def capture_images_from_camera(output_dir, img_count, camera_index=0):
     return img_count
 
 if __name__ == "__main__":
-    output_directory = "images_train/01_paracetamol/"
+    output_directory = "images_train/04/"
     
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)

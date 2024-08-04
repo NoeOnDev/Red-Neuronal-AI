@@ -40,7 +40,7 @@ model = Sequential([
     Flatten(),
     Dense(512, activation='relu', kernel_regularizer=l2(0.001)),
     Dropout(0.5),
-    Dense(3, activation='softmax')
+    Dense(4, activation='softmax')
 ])
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])

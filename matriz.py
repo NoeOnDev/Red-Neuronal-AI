@@ -8,7 +8,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import os
 
-model = load_model('picas_model.h5')
+model = load_model('pastillas_model.h5')
 
 def preprocess_image(img_path):
     img_array = cv2.imread(img_path)
@@ -18,7 +18,7 @@ def preprocess_image(img_path):
     return img_array
 
 test_dir = 'images_test'
-classes = ['10_de_picas', '11_j_de_picas', '12_q_de_picas', '13_k_de_picas', '1_as_de_picas', '2_de_picas', '3_de_picas', '4_de_picas', '5_de_picas', '6_de_picas', '7_de_picas', '8_de_picas', '9_de_picas']
+classes = ['01', '02', '03', '04']
 class_indices = {cls: idx for idx, cls in enumerate(classes)}
 
 true_labels = []
