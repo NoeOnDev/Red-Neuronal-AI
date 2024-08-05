@@ -40,7 +40,7 @@ model = Sequential([
     Flatten(),
     Dense(512, activation='relu', kernel_regularizer=l2(0.001)),
     Dropout(0.5),
-    Dense(4, activation='softmax')
+    Dense(13, activation='softmax')
 ])
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
@@ -54,7 +54,7 @@ history = model.fit(
     callbacks=[early_stopping]
 )
 
-model.save('pastillas_model.h5')
+model.save('picas_model.h5')
 
 plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')

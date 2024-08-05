@@ -5,7 +5,7 @@ import cv2
 import os
 
 app = Flask(__name__)
-model = load_model('pastillas_model.h5')
+model = load_model('picas_model.h5')
 
 def preprocess_image(img_array):
     img_array = cv2.resize(img_array, (150, 150))
@@ -40,14 +40,16 @@ def predict():
     prediction = model.predict(img_array)
     
     classes = [
-        '01', '02', '03', '04'
+        '10 de picas', 'J de picas', 'Q de picas', 'K de picas', 
+        'As de picas', '2 de picas', '3 de picas', '4 de picas', 
+        '5 de picas', '6 de picas', '7 de picas', '8 de picas', '9 de picas'
     ]
     
     confidence_threshold = 0.9
 
     max_prediction = np.max(prediction)
     if max_prediction < confidence_threshold:
-        predicted_class = "No hay pastilla reconocida"
+        predicted_class = "No hay carta reconocida"
     else:
         predicted_class = classes[np.argmax(prediction)]
     
