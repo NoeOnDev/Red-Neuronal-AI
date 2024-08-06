@@ -31,7 +31,7 @@ def capture_images_from_camera(output_dir, img_count, camera_index=0):
         
         current_time = time.time()
         
-        if not paused and (current_time - last_capture_time) >= 1:
+        if not paused and (current_time - last_capture_time) >= 2:
             img_path = os.path.join(output_dir, f"img_{img_count:03d}.jpg")
             cv2.imwrite(img_path, frame)
             print(f"Saved image {img_path}")

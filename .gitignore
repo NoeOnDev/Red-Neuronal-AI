@@ -5,3 +5,6 @@ as_de_picas_model.h5
 picas_model.h5
 
 models/
+
+images_train_pastillas/
+images_test_pastillas/
